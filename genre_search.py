@@ -20,7 +20,7 @@ kdc_list = [150, 800, 230, 690, 180, 910, 700, 740, 500, 160]
 # ssu 도서관 데이터 제거
 def exclude_ssu_data(dataframe):
     exclusion_df = pd.read_csv(f'{common.resource_file_path}/books_with_count.csv')
-    exclusion_df = exclusion_df[exclusion_df['권수'] > 10]
+    exclusion_df = exclusion_df[exclusion_df['권수'] > 8]
     dataframe = dataframe[~dataframe['ISBN'].isin(exclusion_df['ISBN'])]
     return dataframe
 

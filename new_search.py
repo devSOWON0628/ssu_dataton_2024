@@ -166,7 +166,7 @@ def main(new_needed_count):
 
     # 이미 숭실대학교가 가지고 있는 도서의 경우 제외
     ssu_df = pd.read_csv(f'{common.resource_file_path}/books_with_count.csv')
-    ssu_df = ssu_df[ssu_df['권수'] > 10]
+    ssu_df = ssu_df[ssu_df['권수'] > 8]
     final_df = final_df[~final_df['ISBN'].isin(ssu_df['ISBN'])] 
 
     # 유아, 어린이, 만화 도서 제외

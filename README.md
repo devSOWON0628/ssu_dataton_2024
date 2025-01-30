@@ -8,8 +8,8 @@
  | 조건 | 비율 | 2만권 기준 |  |
 | --- | --- | --- | --- |
 | 숭실대학교 중앙도서관 선호 장르 기반 추천 | 40% | 8,000 | 정보나루 데이터 |
-| 지난 달 인기 키워드 기반 추천 | 10% | 2,000 | 정보나루 |
-| 최근 6개월간 신간 기반 추천 | 30% | 6,000 | [yes24](https://www.yes24.com/Product/Category/AttentionNewProduct?categoryNumber=001001&pageNumber=17&pageSize=120&newProductType=ATTENTION), [교보](https://product.kyobobook.co.kr/new/KOR#?page=1&sort=new&year=2024&month=11&week=4&per=20&saleCmdtDvsnCode=KOR&gubun=newGubun&saleCmdtClstCode=) 크롤링  |
+| 지난 달 인기 키워드 기반 추천 | 20% | 4,000 | 정보나루 |
+| 최근 6개월간 신간 기반 추천 | 20% | 4,000 | [yes24](https://www.yes24.com/Product/Category/AttentionNewProduct?categoryNumber=001001&pageNumber=17&pageSize=120&newProductType=ATTENTION), [교보](https://product.kyobobook.co.kr/new/KOR#?page=1&sort=new&year=2024&month=11&week=4&per=20&saleCmdtDvsnCode=KOR&gubun=newGubun&saleCmdtClstCode=) 크롤링  |
 | 최근 3년간 베스트셀러 기반 추천 | 20% | 4,000 | [yes24](https://www.yes24.com/Product/Category/BestSeller?categoryNumber=001&pageNumber=1&pageSize=200&goodsStatGb=06), [교보](https://store.kyobobook.co.kr/bestseller/total/weekly) 크롤링 |
 2. 사용 방법
 
@@ -26,8 +26,13 @@
     3. 중복 도서 처리:
 ISBN 기준으로 중복된 도서를 제거합니다.
     4. 권수 수정:
-권수가 10권 이상인 도서는 10권으로 수정합니다.
+권수가 8권 이상인 도서는 8권으로 수정합니다.
     5. 추천 도서 권수 맞추기:
 권수가 부족하면 부족한 만큼 추가 도서를 추천하여 채웁니다.
     6. CSV 파일로 저장:
 최종적으로 추천된 도서 정보를 CSV 파일로 저장하여 반환합니다.
+
+3. 실행
+''' 
+python integration_gui_search.py 
+'''

@@ -105,7 +105,7 @@ def get_best_books_by_aladin():
 def process_and_save_data(dataframes, output_file, exclusion_file, needed_count):
     final_df = dataframes
     exclusion_df = pd.read_csv(exclusion_file)
-    exclusion_df = exclusion_df[exclusion_df['권수'] > 10]
+    exclusion_df = exclusion_df[exclusion_df['권수'] > 8]
     final_df = final_df[~final_df['ISBN'].isin(exclusion_df['ISBN'])]
     
     exclude_categories = ["유아", "어린이", "만화"]

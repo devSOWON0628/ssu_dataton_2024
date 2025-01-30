@@ -129,7 +129,7 @@ def save_books_to_csv(book_data, file_path, need_book_count):
     
     # 숭실대 도서 제거
     exclusion_df = pd.read_csv(f"{common.resource_file_path}/books_with_count.csv")  # 숭실대 도서
-    exclusion_df = exclusion_df[exclusion_df['권수'] > 10]
+    exclusion_df = exclusion_df[exclusion_df['권수'] > 8]
     result_df = result_df[~result_df['ISBN'].isin(exclusion_df['ISBN'])]
     
     # ISBN별 개수를 "권수" 컬럼에 추가
@@ -184,4 +184,4 @@ def main(need_book_count):
 
 # 실행
 if __name__ == "__main__":
-    main(2000)
+    main(4000)
