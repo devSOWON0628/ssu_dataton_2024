@@ -1,2 +1,3 @@
 common.py
 *.pyc
+result/*

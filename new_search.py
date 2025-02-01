@@ -150,12 +150,14 @@ def get_new_books_by_kyobo():
     # print("교보 신간 검색 종료\n")
 
 def main(new_needed_count):
-    # 교보에서 데이터를 수집
+    # 교보 크롤링
     kyobo_data = pd.concat(get_new_books_by_kyobo(), ignore_index=True)
+    # 알라딘 api
     aladin_data = pd.concat(get_new_books_by_aladin(), ignore_index=True)
+    # yes24 크롤링
     yes24_data = pd.concat(get_new_books_by_yes24(), ignore_index=True)
 
-    # 모든 데이터를 합침
+    # 데이터 병합
     final_df = pd.concat([kyobo_data, aladin_data, yes24_data], ignore_index=True)
 
     # ISBN별 개수를 "권수" 컬럼에 추가
@@ -174,7 +176,7 @@ def main(new_needed_count):
     final_df = final_df[~final_df["분야"].str.contains("어린이", na=False)]
     final_df = final_df[~final_df["분야"].str.contains("만화", na=False)]
 
-    # 누적 권수를 계산하면서 4000권까지 선택
+    # 누적 권수를 계산하면서 new_needed_count권까지 선택
     final_df["누적권수"] = final_df["권수"].cumsum()
     final_df = final_df[final_df["누적권수"] <= new_needed_count]
 

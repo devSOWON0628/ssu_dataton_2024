@@ -93,9 +93,9 @@ class BookRecommendationApp:
         common.create_result_folder()
 
         # 개수 분배
-        genre_needed_count = round(needed_input * 0.4)
-        keyword_needed_count = round(needed_input * 0.2)
-        new_needed_count = round(needed_input * 0.2)
+        genre_needed_count      = round(needed_input * 0.4)
+        keyword_needed_count    = round(needed_input * 0.2)
+        new_needed_count        = round(needed_input * 0.2)
         bestseller_needed_count = needed_input - (genre_needed_count + keyword_needed_count + new_needed_count)
 
         # ✅ 실시간 경과 시간 업데이트 스레드 시작

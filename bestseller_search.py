@@ -57,24 +57,23 @@ def get_best_books_by_kyobo(chrome_options):
     try:
         for i in range(NEEDED_MONTHS):
             print(f"{NEEDED_MONTHS}/{i + 1}")
-            year, month = calc_year_month(i+1)
+            year, month = calc_year_month(i+2)
             url = f"https://store.kyobobook.co.kr/bestseller/total/monthly?page=1&ymw={year}{month}&per=200"
             browser.get(url)
             browser.fullscreen_window()
             WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[1]/main/section/div/div/section/div[4]/div/div/button[3]'))).click()
-            
             for retry_count in range(5):
                 try:
                     time.sleep(2)
                     file_name = f"{common.get_download_path()}/교보문고_종합_베스트셀러_상품리스트.xlsx"
                     df = pd.read_excel(file_name)
+                    common.file_delete(file_name)
+                    df_filtered = filter_dataframe(df, ['상품코드', '상품명', '인물', '출판사', '분야'], {'상품코드': 'ISBN', '인물': '저자'})
+                    dataframes.append(df_filtered)
                     break
                 except:
                     time.sleep(6)
             
-            common.file_delete(file_name)
-            df_filtered = filter_dataframe(df, ['상품코드', '상품명', '인물', '출판사', '분야'], {'상품코드': 'ISBN', '인물': '저자'})
-            dataframes.append(df_filtered)
     finally:
         browser.quit()
     return dataframes
@@ -121,17 +120,13 @@ def process_and_save_data(dataframes, output_file, exclusion_file, needed_count)
 # 메인 함수
 def main(bestseller_needed_count):
     chrome_options = common.get_chrome_options()
-    
-    print("알라딘 시작")
+    # 알라딘 api
     aladin_data = pd.concat(get_best_books_by_aladin(), ignore_index=True)
-
-    print("교보 시작")
+    # 교보 크롤링
     kyobo_data = pd.concat(get_best_books_by_kyobo(chrome_options), ignore_index=True)
-
-    print("yes24 시작")
+    # yes4 크롤링
     yes24_data = pd.concat(get_best_books_by_yes24(chrome_options), ignore_index=True)
-
-    print("저장")
+    # 병합
     final_df = pd.concat([aladin_data, kyobo_data, yes24_data], ignore_index=True)
     
     process_and_save_data(

@@ -127,13 +127,13 @@ def main(needed_input):
     merged_books["권수"] = merged_books["권수"].apply(lambda x: 8 if x >= 8 else x)
     merged_books["누적권수"] = merged_books["권수"].cumsum()
 
-    result_df = fill_books(merged_books, needed_input)
+    result_df = fill_books(merged_books, needed_input) # 추가 추천 진행
     result_df = result_df.sort_values(by='권수', ascending=False).reset_index(drop=True)
     result_df["누적권수"] = result_df["권수"].cumsum()
     result_df = result_df[result_df["누적권수"] <= needed_input]
     
     result_df.to_csv(f'{common.get_download_path()}/combined_book_recommendations.csv', index=False, encoding='utf-8')
-    delete_all_files()
+    delete_all_files() # 4개 엑셀 목록 삭제
 
 # 실행
 if __name__ == "__main__":
